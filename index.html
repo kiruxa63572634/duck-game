@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		.duckClass{
+			width : 100px;
+			height : 100px;
+			position: absolute;
+			background-size: 100%;
+			background-image: url(1.png);
+		}
+	</style>
+</head>
+<body>
+	<button class="btn">START GAME</button>
+	<h1>Score: <span class="point">0</span></h1>
+	<img src="wave1.png" style="position: absolute; top: 300px;">
+	<img src="wave3.png" style="position: absolute; top: 490px">
+	<img src="wave2.png" style="position: absolute; top: 620px">
+
+
+	<script type="text/javascript">
+		let btn = document.querySelector(".btn")
+		let y = [200, 400, 600]
+		let score = 0
+		let scoreSpan = document.querySelector(".point")
+		let type = ["good", "bad"]
+
+		let createDuck = function(){
+			let duck = document.createElement("div")
+			document.body.appendChild(duck)
+			duck.classList.add("duckClass")
+			randomX = Math.round(Math.random()*1500)
+			duck.style.left = randomX + "px"
+			randomY = Math.round(Math.random()*2)
+			duck.style.top = y[randomY] + "px"
+
+			let typeIndex = Math.round(Math.random()*1)
+			duck.myType = type[typeIndex]
+
+			if(duck.myType =="good"){
+
+				duck.style.backgroundImage = "url(1.png)"
+			}else if(duck.myType =="bad"){
+				duck.style.backgroundImage = "url(2.png)"
+
+			}
+
+			duck.onclick = function(){
+				duck.style.display = "none"
+				if(duck.myType=="good"){
+					score = score + 10
+					scoreSpan.innerHTML = score
+				} else if (duck.myType =="bad"){
+					score = score  - 20
+					scoreSpan.innerHTML = score
+				}
+
+
+				score = score + 10
+				scoreSpan.innerHTML = score
+			}
+		}
+
+		btn.onclick = function(){
+			creatDucks = setInterval(createDuck, 500)
+		}
+		
+
+	</script>
+</body>
+</html>
